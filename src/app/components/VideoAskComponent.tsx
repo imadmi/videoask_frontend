@@ -34,6 +34,7 @@ const VideoAskComponent: React.FC<VideoAskComponentProps> = ({
     }
   }, [mockData]);
 
+  
   // changes the videoAsk based on the question clicked
   const handleQuestionClick = async (nextVideoId: string | null) => {
     await new Promise((resolve) => setTimeout(resolve, 500));

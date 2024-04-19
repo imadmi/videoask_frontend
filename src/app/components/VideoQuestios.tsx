@@ -19,6 +19,17 @@ const QuestionList = ({
 
   const [ClickIndex, setClickIndex] = useState<number | null>(null);
 
+  const trackClicks = (qst : string) => {
+    try {
+      fetch(`${process.env.NEXT_PUBLIC_API_URL}/track-query-param/?query_param=${qst}`, {
+        method: "GET",
+      });
+    }
+    catch (error) {
+      console.error("Error tracking clicks", error);
+    }
+  }
+
   const handleClickingQST = (event: any, qst: Qsts, index: number) => {
     event.stopPropagation();
     triggerBlink();
@@ -44,6 +55,7 @@ const QuestionList = ({
       stack.print()
 
       handleQuestionClick(qst.next_video_id);
+      trackClicks(qst.question);
       context.setIsPaused(false);
       toggleAnimation();
       context.setUpdatedCurrentTime(0);
